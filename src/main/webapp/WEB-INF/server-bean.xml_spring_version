@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    classpath:/org/springframework/beans/factory/xml/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://cxf.apache.org/jaxws 
+    http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/jaxrs
+    http://cxf.apache.org/schemas/jaxrs.xsd">
+
+<import resource="classpath:META-INF/cxf/cxf.xml"/>
+<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+<bean id="dataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	    <property name="driverClass" value="com.mysql.jdbc.Driver" />
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/shapp" />
+	    <property name="user" value="root" />
+	    <property name="password" value="123456" />
+</bean>
+<bean id="sessionFactory" class="">
+	    <!-- 注入Hibernate 配置文件路径,前面要加上  classpath:-->
+	    <!--  <property name="configLocation" value="classpath:hibernate.cfg.xml"/>org.springframework.orm.hibernate3.LocalSessionFactoryBean-->
+	    <!-- 把数据源 bean 注入到sessionFactory的dataSource属性 -->
+	    <property name="dataSource" ref="dataSource"/>
+	    <property name="hibernateProperties">
+	       <props>
+	          <prop key="hibernate.show_sql">true</prop>
+	          <prop key="hibernate.current_session_context_class">thread</prop>
+	          <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	       </props>
+	    </property>
+	    <property name="mappingLocations">
+	            <list>
+	                <value>com/shapp/bean/Publish.hbm.xml</value>
+	                <value>com/shapp/bean/Slideheader.hbm.xml</value>
+	                <value>com/shapp/bean/Slidedetail.hbm.xml</value>
+	                <value>com/shapp/bean/Slideimage.hbm.xml</value>
+	                <value>com/shapp/bean/Marker.hbm.xml</value>
+	                <value>com/shapp/bean/Wordheader.hbm.xml</value>
+	                <value>com/shapp/bean/Wordsentence.hbm.xml</value>
+	                <value>com/shapp/bean/Wordtranslation.hbm.xml</value>
+	                <value>com/shapp/bean/User.hbm.xml</value>
+	                <value>com/shapp/bean/Userinfo.hbm.xml</value>
+	                <value>com/shapp/bean/Friends.hbm.xml</value>
+	            </list>
+        </property>
+</bean>
+<bean id="homeDao" class="com.shapp.DAO.HomeDAO">
+	    <!-- 把sessionFactory 注入给studentDao -->
+	    <property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<!--  <bean id="downloadService" class="com.zax.service.downloadServiceEntry.DownloadServiceEntry"/>-->
+<bean id="commonService" class="com.shapp.service.commonServiceEntry.CommonServiceEntry"/>
+
+<!-- 这里的地址很重要，客户端需要通过这个地址来访问WebService -->
+<jaxrs:server id="serviceContainer" address="/service">
+    <jaxrs:serviceBeans>
+       <!-- <ref bean="downloadService" /> -->
+        <ref bean="commonService" />
+    </jaxrs:serviceBeans>
+    <jaxrs:extensionMappings>
+        <entry key="json" value="application/json" />
+        <entry key="xml" value="application/xml" />
+    </jaxrs:extensionMappings>
+    <jaxrs:languageMappings>
+           <entry key="en" value="en-gb"/>  
+    </jaxrs:languageMappings>
+</jaxrs:server>
+</beans>
