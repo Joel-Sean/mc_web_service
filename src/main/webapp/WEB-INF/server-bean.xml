@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
     xmlns:jaxws="http://cxf.apache.org/jaxws"
     xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
     classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
@@ -13,15 +17,12 @@
     http://cxf.apache.org/jaxrs
     http://cxf.apache.org/schemas/jaxrs.xsd">
 
-<import resource="classpath:META-INF/cxf/cxf.xml"/>
-<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-<bean id="webClient" class="org.apache.cxf.jaxrs.client.WebClient" factory-method="create">
-        <constructor-arg type="java.lang.String" value="http://localhost:8000/mc_web_service/service/common/" />
-    </bean>
-<!-- 
-	<bean id="dataSource"
+
+    <bean id="dataSource"
         class="org.apache.commons.dbcp.BasicDataSource">  
         <property name="driverClassName"  
             value="com.mysql.jdbc.Driver">  
@@ -32,7 +33,33 @@
         <property name="maxActive" value="10"></property>  
         <property name="minIdle" value="2"></property>  
         <property name="maxWait" value="300"></property>  
-    </bean> 
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+       <property name="dataSource" ref="dataSource" />
+       
+        <property name="mapperLocations" value="classpath:mc/webservice/mybatis/*.xml" />
+	</bean>  
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+	   <property name="basePackage" value="mc.webservice.dao" />
+	   <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>  
+	
+    
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource"></property>  
+    </bean>
+    
+   
+	
+	
+	<bean id="AppEntity" class="mc.webservice.bean.AppEntity" />
+	
+	
+<!-- 
+	 
 
     <bean id="sqlMapClient"  
         class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">  

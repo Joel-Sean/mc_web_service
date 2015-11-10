@@ -140,6 +140,18 @@
 			</dependency>
 			<!-- Spring end -->
 			
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.2.3</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+			
 			<!-- Jackson JSON Processor -->
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -222,6 +234,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>*.java</include>
+					<include>*.xml</include>
 				</includes>
 			</resource>
 			<resource>

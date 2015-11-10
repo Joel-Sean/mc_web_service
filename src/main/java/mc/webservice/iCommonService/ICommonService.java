@@ -27,6 +27,6 @@ public interface ICommonService {
     @Path("/HeartBeat/postData")
 	@Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-	public String HeartBeat(@PathParam("hb") HeartBeatEntity hb)throws IOException;
+	public HeartBeatEntity HeartBeat(@PathParam("hb") HeartBeatEntity hb)throws IOException;
 	
 }

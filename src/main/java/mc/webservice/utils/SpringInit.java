@@ -1,7 +1,9 @@
 package mc.webservice.utils;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 
 public class SpringInit  implements ServletContextListener {
 	
@@ -11,11 +13,10 @@ public class SpringInit  implements ServletContextListener {
 	    }
 	    @Override
 	    public void contextInitialized(ServletContextEvent event) {
-//	        springContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
+	     	
+	    	ServletContext context = event.getServletContext();
+	    	SpringBeanFactory.init(context);
 	    	
-	    	String relativePath = event.getServletContext().getInitParameter("contextConfigLocation");
-	    	String realPath = event.getServletContext().getRealPath(relativePath);
-	    	SpringBeanFactory.init(realPath);
 	    }
 	    
 	    @Override

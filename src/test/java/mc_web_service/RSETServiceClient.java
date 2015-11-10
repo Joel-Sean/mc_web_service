@@ -6,22 +6,23 @@ import mc.webservice.bean.AppEntity;
 import mc.webservice.bean.HeartBeatEntity;
 import mc.webservice.bean.NodeEntity;
 import mc.webservice.bean.TaskDetailEntity;
-import mc.webservice.utils.SpringBeanFactory;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 
 import com.opensymphony.xwork2.interceptor.annotations.Before;
 
 public class RSETServiceClient {
-private static WebClient client;
+	
+	
+	private static WebClient client;
     
-    @Before
+	@BeforeClass
     public void init() {
        
-        ApplicationContext ctx = SpringBeanFactory.getContext();
-        client = ctx.getBean("webClient", WebClient.class);
+    	//client = new WebClient()("http://localhost:8080/mc_web_service/service/common/");
+    	client = WebClient.create("http://localhost:8080/mc_web_service/service/common/");
     }
     
     
@@ -45,7 +46,7 @@ private static WebClient client;
     	node.setNode_ip("127.0.0.1");
     	
     	app.setAppName("A");
-    	app.setVersion(1.0);
+    	app.setVersion("1.0");
     	
     	hbe.setNode(node);
     	hbe.setTaskDetail(taskDetail);

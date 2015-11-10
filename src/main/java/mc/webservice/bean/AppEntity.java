@@ -2,7 +2,7 @@ package mc.webservice.bean;
 
 public class AppEntity {
 	private String appName;
-	private double version;
+	private String version;
 	
 	
 	public String getAppName() {
@@ -11,13 +11,12 @@ public class AppEntity {
 	public void setAppName(String appName) {
 		this.appName = appName;
 	}
-	public double getVersion() {
+	public String getVersion() {
 		return version;
 	}
-	public void setVersion(double version) {
+	public void setVersion(String version) {
 		this.version = version;
 	}
-	
 	
 	@Override
 	public String toString() {

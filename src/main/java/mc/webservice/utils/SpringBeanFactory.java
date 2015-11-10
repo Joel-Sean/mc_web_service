@@ -1,7 +1,9 @@
 package mc.webservice.utils;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SpringBeanFactory {
 	
@@ -12,10 +14,10 @@ public class SpringBeanFactory {
 	    *
 	    * @param filePath
 	    */
-	   public static void init(String filePath) {
+	   public static void init(ServletContext eventContext) {
 
 	    if (context == null) {
-	       context = new FileSystemXmlApplicationContext(filePath);
+	       context = WebApplicationContextUtils.getWebApplicationContext(eventContext);
 	    }
 	  }
 	   
