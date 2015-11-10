@@ -3,12 +3,14 @@ package mc.webservice.commonServiceEmtry;
 
 import java.io.IOException;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import mc.webservice.bean.AppEntity;
 import mc.webservice.bean.HeartBeatEntity;
 import mc.webservice.bean.PublishList;
 import mc.webservice.iCommonService.ICommonService;
@@ -30,13 +32,23 @@ public class CommonServiceEntry implements ICommonService{
 
 	@POST
     @Path("/HeartBeat")
+	@Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
 	public String HeartBeat(HeartBeatEntity hb) throws IOException{
 		
-		String uuid = hb.getNode().getUuid();
-		String node_name = hb.getNode().getNode_name();
+		AppEntity app = hb.getApp();
 		
-		return uuid+"_"+node_name;
+		
+		if(app.getAppName().equals("A") && app.getVersion() == 1.0){
+			
+			String uuid = hb.getNode().getUuid();
+			String node_name = hb.getNode().getNode_name();
+			
+			return uuid+"_"+node_name;
+		}
+		
+		return null;
+		
 		
 	}
 	

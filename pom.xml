@@ -23,42 +23,42 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-   		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.3.0</version>
-		</dependency>
-   		<dependency> 
-		  <groupId>mysql</groupId> 
-		  <artifactId>mysql-connector-java</artifactId> 
-		  <version>5.1.28</version> 
-		</dependency>
-		
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-   
-   <!-- Logging start -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-			<scope>runtime</scope>
-		</dependency>
+	   		<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>3.3.0</version>
+			</dependency>
+	   		<dependency> 
+			  <groupId>mysql</groupId> 
+			  <artifactId>mysql-connector-java</artifactId> 
+			  <version>5.1.28</version> 
+			</dependency>
+			
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.2.2</version>
+			</dependency>
+	   
+	   <!-- Logging start -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.slf4j-version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${org.slf4j-version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.16</version>
+				<scope>runtime</scope>
+			</dependency>
 	<!-- Logging end -->  
 		
    		<!-- cxf -->
@@ -69,6 +69,13 @@
 		        <version>2.2.10</version>
 		        <type>pom</type>
 		    </dependency>
+		    
+		    <dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>1.9.13</version>
+			</dependency>
+		    
 		    
 		  <!-- Spring start -->
 			<dependency>

@@ -8,8 +8,16 @@ public class NodeEntity {
 	private String node_description;
 	private String node_status;
 	private String node_hb_time;
+	private String node_ip;
 	
-	
+	public String getNode_ip() {
+		return node_ip;
+	}
+
+	public void setNode_ip(String node_ip) {
+		this.node_ip = node_ip;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}
@@ -60,7 +68,6 @@ public class NodeEntity {
 
 
 
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -76,6 +83,8 @@ public class NodeEntity {
 		builder.append(node_status);
 		builder.append(", node_hb_time=");
 		builder.append(node_hb_time);
+		builder.append(", node_ip=");
+		builder.append(node_ip);
 		builder.append("]");
 		return builder.toString();
 	}

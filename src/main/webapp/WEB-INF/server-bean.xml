@@ -17,6 +17,9 @@
 <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
+<bean id="webClient" class="org.apache.cxf.jaxrs.client.WebClient" factory-method="create">
+        <constructor-arg type="java.lang.String" value="http://localhost:8000/mc_web_service/service/common/" />
+    </bean>
 <!-- 
 	<bean id="dataSource"
         class="org.apache.commons.dbcp.BasicDataSource">  
